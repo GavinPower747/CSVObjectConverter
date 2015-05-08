@@ -1,0 +1,15 @@
+{
+  "name": "Data-Anlysis",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "repository": "",
+  "author": "Gavin Power",
+  "dependencies": {
+    "async": "~0.2.8",
+    "bluebird": "^2.9.25",
+    "express": "^4.0.0",
+    "mongoose": "^4.0.2",
+    "socket.io": "~0.9.14"
+  }
+}

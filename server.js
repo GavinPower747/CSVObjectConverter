@@ -5,7 +5,7 @@ var mongoose = Promise.promisifyAll(require("mongoose"));
 var app = express();
 var port = process.env.PORT || 8081;
 var objectRouter = express.Router();
-var db = mongoose.connect("mongodb://gavinadmin:Gav1nP0wer@ds031631.mongolab.com:31631/objectanalysis");
+var db = mongoose.connect("mongodb://xxxxx:xxxxx@ds031631.mongolab.com:31631/objectanalysis");
 
 
 objectRouter.route("/ObjectAnalysis")
@@ -94,7 +94,6 @@ app.use("/api", objectRouter);
         callback(formattedObject);
       else
       {
-        counter++;
         populateObject();
       }
     })();

@@ -13,7 +13,7 @@ objectRouter.route("/ObjectAnalysis")
     var testObject = {
       FieldA: "String",
       FieldB: "1",
-      FieldC: "27/10/2015"
+      FieldC: "27/10/2015 09:25"
     };
     
     testObject = formatObject(testObject, 
@@ -42,7 +42,7 @@ app.use("/api", objectRouter);
                 if(/\d{4}[/]\d{2}[/]\d{2}/.exec(value))
                 {
                   var array = value.split("/");
-                  formattedDate = new Date()
+                  formattedDate = new Date();
                   formattedDate.setYear(parseInt(array[0]));
                   formattedDate.setMonth(parseInt(array[1]));
                   formattedDate.setDate(parseInt(array[2]));
@@ -50,7 +50,7 @@ app.use("/api", objectRouter);
                 else if(/[0-3]?[0-9][/][0-1]?[0-9][/]\d{4}/.exec(value))
                 {
                   var array = value.split("/");
-                  formattedDate = new Date()
+                  formattedDate = new Date();
                   formattedDate.setYear(parseInt(array[2]));
                   formattedDate.setMonth(parseInt(array[1]));
                   formattedDate.setDate(parseInt(array[0]));
@@ -58,16 +58,25 @@ app.use("/api", objectRouter);
                 else if(/[0-1]?[0-9][/][0-3]?[0-9][/]\d{4}/.exec(value))
                 {
                   var array = value.split("/");
-                  formattedDate = new Date()
+                  formattedDate = new Date();
                   formattedDate.setYear(parseInt(array[2]));
                   formattedDate.setMonth(parseInt(array[0]));
                   formattedDate.setDate(parseInt(array[1]));
                 }
                 
+                //formatting for timespan
+                
+                var array = value.split(":");
+                formattedDate.setHours((parseInt(array[0].substring(array[0].length-3))) ? parseInt(array[0].substring(array[0].length-3)) : 0);
+                formattedDate.setMinutes((parseInt(array[1])) ? parseInt(array[1]) : 0);
+                formattedDate.setSeconds((parseInt(array[2])) ? parseInt(array[2]) : 0);
+                formattedDate.setMilliseconds(0);
+                
                   Object.defineProperty(formattedObject, property, {
                     value: formattedDate,
-                    configurable: true,
-                    writable: true
+                    writable: true,
+                    enumerable: true,
+                    configurable: true
                   });
           }
           else
@@ -76,15 +85,17 @@ app.use("/api", objectRouter);
             {
                 Object.defineProperty(formattedObject, property, {
                   value: value,
-                  configurable: true,
-                  writable: true
+                  writable: true,
+                  enumerable: true,
+                  configurable: true
                 });
             }
             else {
               Object.defineProperty(formattedObject, property, {
                 value: parseInt(value),
-                configurable: true,
-                writable: true
+                writable: true,
+                enumerable: true,
+                configurable: true
               });
             }
           }

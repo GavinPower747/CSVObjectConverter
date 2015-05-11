@@ -105,9 +105,9 @@ app.use("/api", objectRouter);
         callback(formattedObject);
       else
       {
-        populateObject();
+        populateObject(++counter);
       }
-    })();
+    })(counter);
     
     
     
